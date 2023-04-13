@@ -3,6 +3,8 @@ import Room from "./Room";
 import { database } from "../config/firebase";
 import { randomUUID } from "crypto";
 import Players from "./Players";
+import Game from "./Game";
+import Games from "./Games";
 
 export default class Rooms {
   static rooms: { [id: string]: Room } = {};
@@ -61,10 +63,15 @@ export default class Rooms {
     let room = this.rooms[player.roomId];
 
     if (player.roomId) {
-      set(ref(database, "rooms/" + player.roomId), {
-        ...room,
-        players: { ...room.players, [playerId]: !room.players[playerId] },
-      });
+      room.players = { ...room.players, [playerId]: !room.players[playerId] };
+
+      if (Object.values(room.players).every((v) => v)) {
+        let newGame = new Game(player.roomId);
+        let gameId = Games.createGame(newGame);
+        room.game = gameId;
+      }
+
+      set(ref(database, "rooms/" + player.roomId), room);
     }
   }
 

@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { Database, getDatabase } from "firebase/database";
 import Rooms from "../models/Rooms";
 import Players from "../models/Players";
+import Games from "../models/Games";
 
 export let database: Database;
 
@@ -24,4 +25,5 @@ export const configureFirebase = () => {
 export const initializeOberving = () => {
   Rooms.observe();
   Players.observe();
+  Games.observe();
 };
