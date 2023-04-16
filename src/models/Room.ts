@@ -1,14 +1,19 @@
 import { randomUUID } from "crypto";
 import { MAX_ROOM_SIZE, MIN_ROOM_SIZE } from "../lib/constants";
 import Game from "./Game";
+import Player from "./Player";
+import { ref, set } from "firebase/database";
+import { database } from "../config/firebase";
 
 export default class Room {
+  public id: string = "";
   public size: number = 0;
-  public players: { [playerId: string]: boolean } = {};
-  public owner: string = "";
-  public game: string = "";
+  public players: Player[] = [];
+  public owner: Player;
+  public game?: Game;
 
-  constructor(owner: string, size?: number) {
+  constructor(owner: Player, size?: number) {
+    this.id = randomUUID();
     this.owner = owner;
 
     if (size && size >= MIN_ROOM_SIZE && size <= MAX_ROOM_SIZE) {
@@ -16,5 +21,55 @@ export default class Room {
     } else {
       this.size = 10;
     }
+
+    this.sync();
   }
+
+  addPlayer(player: Player) {
+    if (this.players.length >= this.size) {
+      throw new Error("Room is already full!");
+    }
+
+    this.players.push(player);
+
+    this.sync();
+  }
+
+  removePlayer(player: Player) {
+    if (this.players.length <= 1) {
+      this.delete();
+      return;
+    }
+
+    if (player.id === this.owner.id) {
+      this.owner = this.players.find((p) => p.id !== player.id)!;
+    }
+
+    player.clear();
+    this.sync();
+  }
+
+  createGame() {
+    this.game = new Game(this);
+  }
+
+  delete() {
+    set(ref(database, "rooms/" + this.id), null);
+  }
+
+  sync() {
+    let roomData: RoomData = {
+      size: this.size,
+      players: this.players.reduce((acc, p) => ({ ...acc, [p.id]: false }), {}),
+      owner: this.owner.id,
+    };
+
+    set(ref(database, "rooms/" + this.id), roomData);
+  }
+}
+
+export interface RoomData {
+  size: number;
+  players: { [id: string]: boolean };
+  owner: string;
 }

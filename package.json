@@ -16,7 +16,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "firebase": "^9.19.1",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "randomize-array": "^1.2.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",

@@ -2,7 +2,7 @@ import express from "express";
 import { Request, Response } from "express";
 import Dotenv from "dotenv";
 import bodyParser from "body-parser";
-import { configureFirebase, initializeOberving } from "./config/firebase";
+import { configureFirebase } from "./config/firebase";
 import roomRouter from "./routes/room.routes";
 import playerRoutes from "./routes/player.routes";
 
@@ -13,7 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 Dotenv.config();
 configureFirebase();
-initializeOberving();
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Application works!");
