@@ -4,6 +4,7 @@ import Game from "./Game";
 import Player from "./Player";
 import { ref, set } from "firebase/database";
 import { database } from "../config/firebase";
+import { rooms } from "../controllers/room.controllers";
 
 export default class Room {
   public id: string = "";
@@ -12,17 +13,20 @@ export default class Room {
   public owner: Player;
   public game?: Game;
 
-  constructor(owner: Player, size?: number) {
+  constructor(owner: Player, size: number) {
     this.id = randomUUID();
     this.owner = owner;
+    this.players.push(owner);
 
-    if (size && size >= MIN_ROOM_SIZE && size <= MAX_ROOM_SIZE) {
+    if (size >= MIN_ROOM_SIZE && size <= MAX_ROOM_SIZE) {
       this.size = size;
     } else {
       this.size = 10;
     }
 
+    rooms.set(this.id, this);
     this.sync();
+    console.log(`Room ${this.id} created!`);
   }
 
   addPlayer(player: Player) {
@@ -45,6 +49,8 @@ export default class Room {
       this.owner = this.players.find((p) => p.id !== player.id)!;
     }
 
+    this.players = this.players.filter((p) => p.id !== player.id);
+
     player.clear();
     this.sync();
   }
@@ -54,6 +60,7 @@ export default class Room {
   }
 
   delete() {
+    rooms.delete(this.id);
     set(ref(database, "rooms/" + this.id), null);
   }
 

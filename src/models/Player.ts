@@ -2,6 +2,7 @@ import { randomUUID } from "crypto";
 import Role from "./Roles/Role";
 import { ref, set } from "firebase/database";
 import { database } from "../config/firebase";
+import { players } from "../controllers/player.controller";
 
 export default class Player {
   public id: string = "";
@@ -13,7 +14,9 @@ export default class Player {
     this.id = randomUUID();
     this.name = name;
 
+    players.set(this.id, this);
     this.sync();
+    console.log(`Player ${this.name} created!`);
   }
 
   rename(newName: string) {
@@ -42,6 +45,7 @@ export default class Player {
   }
 
   delete() {
+    players.delete(this.id);
     set(ref(database, "players/" + this.id), null);
   }
 
@@ -49,7 +53,7 @@ export default class Player {
     let playerData: PlayerData = {
       name: this.name,
       isReady: this.isReady,
-      role: this.role ? this.role.name : "",
+      role: this.role ? this.role.type ?? "" : "",
     };
 
     set(ref(database, "players/" + this.id), playerData);

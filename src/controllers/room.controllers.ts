@@ -19,8 +19,6 @@ export const createRoom = (req: Request, res: Response) => {
     let owner = players.get(ownerId)!;
     let room = new Room(owner, size);
 
-    rooms.set(room.id, room);
-
     res.status(201).end(room.id);
   } catch (e) {
     res.status(404).end((e as Error).message);

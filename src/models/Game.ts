@@ -1,6 +1,6 @@
 import Player from "./Player";
 import Room from "./Room";
-import Role from "./Roles/Role";
+import Role, { Roles } from "./Roles/Role";
 import shuffle from "../utils/shuffle";
 import { randomUUID } from "crypto";
 import { database } from "../config/firebase";
@@ -37,11 +37,14 @@ export default class Game {
   public policemanPlayersCount: number = 1;
 
   constructor(room: Room) {
+    console.log("Creating game...");
     this.id = randomUUID();
     this.players = room.players;
 
     this.start();
     this.sync();
+
+    console.log(`Game ${this.id} created!`);
   }
 
   start() {
@@ -70,29 +73,29 @@ export default class Game {
 
     let randomIndexes = [];
 
-    for (let i = 1; i <= playersCount; i++) {
+    for (let i = 0; i <= playersCount - 1; i++) {
       randomIndexes.push(i);
     }
 
     randomIndexes = shuffle(randomIndexes);
 
     for (let i = 0; i < this.policemanPlayersCount; i++) {
-      this.players[randomIndexes[0]].setRole(new Role("policeman"));
+      this.players[randomIndexes[0]].setRole(new Role(Roles.Policeman));
       randomIndexes.shift();
     }
 
     for (let i = 0; i < this.doctorPlayersCount; i++) {
-      this.players[randomIndexes[0]].setRole(new Role("doctor"));
+      this.players[randomIndexes[0]].setRole(new Role(Roles.Doctor));
       randomIndexes.shift();
     }
 
     for (let i = 0; i < this.mafiaPlayersCount; i++) {
-      this.players[randomIndexes[0]].setRole(new Role("mafia"));
+      this.players[randomIndexes[0]].setRole(new Role(Roles.Mafia));
       randomIndexes.shift();
     }
 
     for (let i = 0; i < this.inhabitantPlayersCount; i++) {
-      this.players[randomIndexes[0]].setRole(new Role("inhabitant"));
+      this.players[randomIndexes[0]].setRole(new Role(Roles.Inhabitant));
       randomIndexes.shift();
     }
 

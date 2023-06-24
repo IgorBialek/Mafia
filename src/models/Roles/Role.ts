@@ -1,7 +1,14 @@
 export default class Role {
-  public name: string = "";
+  public type: Roles | null = null;
 
-  constructor(name: string) {
-    this.name = name;
+  constructor(type: Roles) {
+    this.type = type;
   }
+}
+
+export enum Roles {
+  Doctor = "Doctor",
+  Inhabitant = "Inhabitant",
+  Mafia = "Mafia",
+  Policeman = "Policeman",
 }

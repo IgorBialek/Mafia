@@ -16,7 +16,6 @@ export const createPlayer = (req: Request, res: Response) => {
   try {
     let { name } = req.body;
     let player = new Player(name);
-    players.set(player.id, player);
 
     res.status(201).end(player.id);
   } catch (e) {
@@ -51,6 +50,27 @@ export const renamePlayer = (req: Request, res: Response) => {
 };
 
 export const toggleReadiness = (req: Request, res: Response) => {
+  try {
+    let { playerId, roomId } = req.body;
+    let player = players.get(playerId)!;
+    let room = rooms.get(roomId)!;
+
+    player.toggleReadiness();
+
+    if (room.players.every((p) => p.isReady)) {
+      console.log(`All players in room ${roomId} are ready`);
+      room.createGame();
+    }
+
+    res
+      .status(201)
+      .end(`Toggled readiness to "${player.isReady}" of player #${playerId}`);
+  } catch (e) {
+    res.status(404).end((e as Error).message);
+  }
+};
+
+export const voteAsMafia = (req: Request, res: Response) => {
   try {
     let { playerId, roomId } = req.body;
     let player = players.get(playerId)!;

@@ -1,7 +1,7 @@
-import Role from "./Role";
+import Role, { Roles } from "./Role";
 
 export default class Policeman extends Role {
-  constructor(name: string) {
-    super(name);
+  constructor(type: Roles) {
+    super(type);
   }
 }
