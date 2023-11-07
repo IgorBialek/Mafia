@@ -1,5 +1,5 @@
 export enum Roles {
-  Inhabitant,
+  Townfolk,
   Mafia,
   Policeman,
   Doctor,

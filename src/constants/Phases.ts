@@ -4,6 +4,6 @@ export enum Phases {
   Mafia,
   Policeman,
   Doctor,
-  Inhabitant,
+  Townfolk,
   Result,
 }
