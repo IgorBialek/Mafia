@@ -19,6 +19,6 @@ export const joinRoom = async (req: Request, res: Response) => {
     });
   } catch (e) {
     console.log(e);
-    res.status(404).send({ message: (e as Error).message, error: true });
+    res.status(400).send({ message: (e as Error).message, error: true });
   }
 };

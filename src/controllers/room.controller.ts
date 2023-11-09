@@ -35,7 +35,7 @@ export const createRoom = async (req: Request, res: Response) => {
   } catch (e) {
     await client.query("ROLLBACK");
     console.log(e);
-    res.status(404).send({ message: (e as Error).message, error: true });
+    res.status(400).send({ message: (e as Error).message, error: true });
   } finally {
     client.release();
   }
@@ -54,6 +54,6 @@ export const searchRooms = async (req: Request, res: Response) => {
     res.send({ message: "Successfully searched rooms", rooms, error: false });
   } catch (e) {
     console.log(e);
-    res.status(404).send({ message: (e as Error).message, error: true });
+    res.status(400).send({ message: (e as Error).message, error: true });
   }
 };
