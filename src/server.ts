@@ -3,6 +3,7 @@ import Dotenv from "dotenv";
 import express, { Request, Response } from "express";
 
 import { configureDatabase } from "./config/database";
+import { playerRoutes } from "./routes/player.routes";
 import { roomRoutes } from "./routes/room.routes";
 
 export const app = express();
@@ -17,7 +18,8 @@ app.get("/", async (req: Request, res: Response) => {
   res.send("Hello World :)!");
 });
 
-app.use(roomRoutes);
+app.use("/room", roomRoutes);
+app.use("/player", playerRoutes);
 
 app.listen(port, async () => {
   console.log(`Running: ${process.env.NODE_ENV}`);

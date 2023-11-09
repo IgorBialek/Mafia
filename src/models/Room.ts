@@ -31,4 +31,18 @@ export default class Room {
 
     return { playerUUID, roomUUID };
   }
+
+  static async getByQuery(query: string) {
+    const roomSelectQuery = `
+        SELECT uuid, name, size, owner
+        FROM rooms
+        WHERE LOWER(name) LIKE LOWER($1) OR uuid::text LIKE $1 OR owner LIKE $1
+    `;
+
+    const { rows: rooms } = await pool.query<Room[]>(roomSelectQuery, [
+      `%${query}%`,
+    ]);
+
+    return rooms;
+  }
 }
