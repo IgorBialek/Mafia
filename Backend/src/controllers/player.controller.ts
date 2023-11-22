@@ -3,18 +3,18 @@ import { Request, Response } from "express";
 import Player from "../models/Player";
 
 export const joinRoom = async (req: Request, res: Response) => {
-  let { username, roomUUID } = req.body;
+  let { username, roomID } = req.body;
 
   try {
-    if (!username || !roomUUID) {
-      throw new Error("Please provide a username and room UUID");
+    if (!username || !roomID) {
+      throw new Error("Please provide a username and room ID");
     }
 
-    let { playerUUID } = await Player.createPlayer(username, roomUUID);
+    let { playerID } = await Player.createPlayer(username, roomID);
 
     res.send({
       message: "Successfully joined room",
-      playerUUID,
+      playerID,
       error: false,
     });
   } catch (e) {

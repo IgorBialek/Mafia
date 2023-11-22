@@ -1,9 +1,9 @@
 import { Roles } from "../constants/Roles";
 
 export type Player = {
-  UUID: string;
+  uuid: string;
   username: string;
   ready: boolean;
-  roomUUID: string;
   role: Roles;
+  isOwner: boolean;
 };

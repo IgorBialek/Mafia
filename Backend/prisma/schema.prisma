@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  uuid     String   @id @default(uuid())
+  username String
+  room    Room     @relation(fields: [roomUuid], references: [uuid], onDelete: Cascade) 
+  roomUuid String 
+  role    String? 
+  ready   Boolean @default(false)
+  isOwner Boolean @default(false)
+  votes   Vote[] @relation(name: "VoterToVote")
+  targets Vote[] @relation(name: "TargetToVote")
+}
+
+model Room { 
+  uuid      String   @id  @default(uuid())
+  name      String
+  size      Int
+  phase     String   @default("Lobby")
+  players   Player[]
+  votes     Vote[]
+}
+
+model Vote {
+  uuid     String   @id  @default(uuid())
+  room     Room     @relation(fields: [roomUuid], references: [uuid], onDelete: Cascade) 
+  roomUuid String 
+  voter    Player   @relation(name: "VoterToVote",fields: [voterUuid], references: [uuid]) 
+  voterUuid String
+  target   Player   @relation(name: "TargetToVote",fields: [targetUuid], references: [uuid]) 
+  targetUuid String
+}

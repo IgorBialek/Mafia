@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
 
-import { pool } from "../config/database";
+import Player from "../models/Player";
 import Room from "../models/Room";
 
 export const createRoom = async (req: Request, res: Response) => {
   let { username, roomName, roomSize } = req.body;
-  const client = await pool.connect();
 
   try {
     if (!username || !roomName || !roomSize) {
@@ -16,28 +15,19 @@ export const createRoom = async (req: Request, res: Response) => {
       throw new Error("Room size must be between 0 and 16");
     }
 
-    await client.query("BEGIN");
+    let { roomID } = await Room.createRoom(roomName, roomSize);
 
-    let { playerUUID, roomUUID } = await Room.createRoom(
-      username,
-      roomName,
-      roomSize
-    );
-
-    await client.query("COMMIT");
+    let { playerID } = await Player.createPlayer(username, roomID, true);
 
     res.send({
       message: "Successfully created room",
-      playerUUID,
-      roomUUID,
+      roomID,
+      playerID,
       error: false,
     });
   } catch (e) {
-    await client.query("ROLLBACK");
     console.log(e);
     res.status(400).send({ message: (e as Error).message, error: true });
-  } finally {
-    client.release();
   }
 };
 

@@ -1,5 +1,5 @@
 export enum Phases {
-  Waiting,
+  Lobby,
   Roles,
   Mafia,
   Policeman,

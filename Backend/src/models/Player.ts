@@ -1,26 +1,24 @@
-import { randomUUID } from "crypto";
+import { PrismaClient } from "@prisma/client";
 
-import { pool } from "../config/database";
-
+const prisma = new PrismaClient();
 export default class Player {
-  static async createPlayer(username: string, roomUUID: string) {
-    let playerUUID = randomUUID();
+  static async createPlayer(
+    username: string,
+    roomID: string,
+    isOwner: boolean = false
+  ) {
+    let { uuid: playerID } = await prisma.player.create({
+      data: {
+        username,
+        isOwner,
+        room: {
+          connect: {
+            uuid: roomID,
+          },
+        },
+      },
+    });
 
-    const playerInsertQuery = `
-        INSERT INTO players (uuid, username, ready, room_uuid)
-        VALUES ($1, $2, 'false', $3)
-    `;
-
-    const { rowCount: playerInserted } = await pool.query(playerInsertQuery, [
-      playerUUID,
-      username,
-      roomUUID,
-    ]);
-
-    if (playerInserted !== 1) {
-      throw new Error("Failed to create player");
-    }
-
-    return { playerUUID };
+    return { playerID };
   }
 }

@@ -1,6 +1,8 @@
+import { Phases } from "../constants/Phases";
+
 export type Room = {
-  UUID: string;
+  uuid: string;
   size: number;
   name: string;
-  owner: string;
+  phase: Phases;
 };
