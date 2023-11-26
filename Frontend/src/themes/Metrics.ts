@@ -2,7 +2,7 @@ export const METRICS = {
   bottomBar: {
     borderWidth: 1,
     paddingTop: 10,
-    height: 60,
+    height: 48,
   },
   bottomBarItem: {
     height: 38,
