@@ -10,7 +10,7 @@
     "dev:prisma": "prisma db push && prisma studio"
   },
   "keywords": [],
-  "author": "",
+  "author": "igorbialek",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.6.0",
