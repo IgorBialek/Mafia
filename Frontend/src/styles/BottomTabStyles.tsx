@@ -8,7 +8,7 @@ const BottomTabStyles: BottomTabNavigationOptions = {
   tabBarShowLabel: false,
   tabBarStyle: {
     backgroundColor: COLORS.secondaryBackground,
-    borderColor: COLORS.border,
+    borderTopColor: COLORS.border,
     borderTopWidth: METRICS.bottomBar.borderWidth,
     display: "flex",
     flexDirection: "row",

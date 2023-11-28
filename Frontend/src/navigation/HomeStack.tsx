@@ -10,7 +10,10 @@ const Tab = createBottomTabNavigator();
 
 const HomeStack = () => {
   return (
-    <Tab.Navigator screenOptions={BottomTabStyles}>
+    <Tab.Navigator
+      screenOptions={BottomTabStyles}
+      initialRouteName={SCREENS.CreateRoom}
+    >
       <Tab.Screen
         options={() => BottomTabItemStyles(SCREENS.JoinRoom)}
         name={SCREENS.JoinRoom}

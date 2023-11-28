@@ -11,4 +11,10 @@ export const METRICS = {
     paddingHorizontal: 10,
     gap: 5,
   },
+  screenWrapper: {
+    paddingHorizontal: 20,
+  },
+  screenTitle: {
+    fontSize: 36,
+  },
 };
