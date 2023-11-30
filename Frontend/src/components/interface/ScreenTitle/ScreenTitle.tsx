@@ -3,9 +3,9 @@ import { Text, View } from "react-native";
 
 import styles from "./ScreenTitle.styles";
 
-interface Props {
+type Props = {
   title: string;
-}
+};
 
 const ScreenTitle: FC<Props> = ({ title }) => {
   return (

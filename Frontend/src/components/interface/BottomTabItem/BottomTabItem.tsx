@@ -12,12 +12,12 @@ import { useFocusEffect } from "@react-navigation/native";
 import { METRICS } from "../../../themes/Metrics";
 import styles from "./BottomTabItem.styles";
 
-interface Props {
+type Props = {
   children: ReactNode;
   color: string;
   text: string;
   focused: boolean;
-}
+};
 
 const BottomTabItem: FC<Props> = ({ children, color, text, focused }) => {
   const containerWidth = useSharedValue(METRICS.bottomBarItem.width);

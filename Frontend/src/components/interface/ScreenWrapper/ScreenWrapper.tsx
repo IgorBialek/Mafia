@@ -3,9 +3,9 @@ import { View } from "react-native";
 
 import styles from "./ScreenWrapper.styles";
 
-interface Props {
+type Props = {
   children: ReactNode;
-}
+};
 
 const ScreenWrapper: FC<Props> = ({ children }) => {
   return <View style={styles.container}>{children}</View>;
