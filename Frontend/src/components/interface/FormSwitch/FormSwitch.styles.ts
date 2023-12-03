@@ -4,11 +4,13 @@ import { COLORS } from "../../../themes/Colors";
 import { METRICS } from "../../../themes/Metrics";
 
 const styles = StyleSheet.create({
-  title: {
+  container: {
+    marginBottom: METRICS.formSwitch.container.marginBottom,
+  },
+  label: {
+    marginVertical: METRICS.formSwitch.label.marginVertical,
     color: COLORS.primaryText,
     fontWeight: "bold",
-    fontSize: METRICS.screenTitle.fontSize,
-    marginBottom: METRICS.screenTitle.marginBottom,
   },
 });
 

@@ -15,6 +15,46 @@ export const METRICS = {
     paddingHorizontal: 20,
   },
   screenTitle: {
-    fontSize: 36,
+    fontSize: 24,
+    marginBottom: 10,
+  },
+  formTextInput: {
+    container: {
+      marginBottom: 10,
+    },
+    label: {
+      marginVertical: 5,
+    },
+    input: {
+      padding: 10,
+      borderRadius: 5,
+    },
+  },
+  formNumberInput: {
+    container: {
+      marginBottom: 10,
+    },
+    label: {
+      marginVertical: 5,
+    },
+    input: {
+      borderRadius: 5,
+    },
+    valueContainer: {
+      height: 34,
+      width: 34,
+    },
+    button: {
+      height: 34,
+      width: 34,
+    },
+  },
+  formSwitch: {
+    container: {
+      marginBottom: 10,
+    },
+    label: {
+      marginVertical: 5,
+    },
   },
 };

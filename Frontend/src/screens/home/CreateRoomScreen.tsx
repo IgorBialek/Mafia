@@ -1,7 +1,8 @@
 import { Field, Formik } from "formik";
-import { Switch, View } from "react-native";
+import { View } from "react-native";
 
 import FormNumberInput from "../../components/interface/FormNumberInput/FormNumberInput";
+import FormSwitch from "../../components/interface/FormSwitch/FormSwitch";
 import FormTextInput from "../../components/interface/FormTextInput/FormTextInput";
 import ScreenTitle from "../../components/interface/ScreenTitle/ScreenTitle";
 import ScreenWrapper from "../../components/interface/ScreenWrapper/ScreenWrapper";
@@ -36,21 +37,26 @@ const CreateRoomScreen = () => {
             <Field
               component={FormTextInput}
               name="name"
-              placeholder={STRINGS.createRoom.formRoomName}
+              placeholder={STRINGS.createRoom.formRoomNamePlaceholder}
+              label={STRINGS.createRoom.formRoomName}
             />
 
             {/* input to enter room size */}
             <Field
               component={FormNumberInput}
               name="size"
-              placeholder={STRINGS.createRoom.formRoomName}
+              placeholder={8}
+              label={STRINGS.createRoom.formRoomSize}
+              minVal={6}
+              maxVal={16}
             />
 
             {/* switch for private room */}
             <Field name="isPrivate">
               {() => {
                 return (
-                  <Switch
+                  <FormSwitch
+                    label={STRINGS.createRoom.formRoomPrivate}
                     value={values.isPrivate}
                     onValueChange={(value) => {
                       setFieldValue("isPrivate", value);
@@ -59,16 +65,6 @@ const CreateRoomScreen = () => {
                 );
               }}
             </Field>
-
-            {/* if private room is enabled, show input to enter room password */}
-
-            {values.isPrivate && (
-              <Field
-                component={FormTextInput}
-                name="password"
-                placeholder={STRINGS.createRoom.formRoomPassword}
-              />
-            )}
 
             {/* switch for advanced settings */}
 

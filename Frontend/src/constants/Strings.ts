@@ -9,9 +9,10 @@ const STRINGS = {
     inputRoomPassword: "Room Password",
     buttonCreateRoom: "Create",
     formRoomName: "Room Name",
+    formRoomNamePlaceholder: "Amazing Room ✨",
     formRoomSize: "Room Size",
+    formRoomSizePlaceholder: "0",
     formRoomPrivate: "Private",
-    formRoomPassword: "Room Password",
   },
   joinRoom: {
     title: "Join Room 🌐",
