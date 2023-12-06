@@ -16,12 +16,9 @@ export const METRICS = {
   },
   screenTitle: {
     fontSize: 24,
-    marginBottom: 10,
+    margin: 10,
   },
   formTextInput: {
-    container: {
-      marginBottom: 10,
-    },
     label: {
       marginVertical: 5,
     },
@@ -31,9 +28,6 @@ export const METRICS = {
     },
   },
   formNumberInput: {
-    container: {
-      marginBottom: 10,
-    },
     label: {
       marginVertical: 5,
     },
@@ -50,11 +44,11 @@ export const METRICS = {
     },
   },
   formSwitch: {
-    container: {
-      marginBottom: 10,
-    },
     label: {
       marginVertical: 5,
     },
+  },
+  formWrapper: {
+    gap: 10,
   },
 };

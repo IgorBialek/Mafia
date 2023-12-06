@@ -1,5 +1,5 @@
 import { FieldProps } from "formik";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Pressable, Text, View } from "react-native";
 
 import { COLORS } from "../../../themes/Colors";
@@ -10,33 +10,33 @@ import styles from "./FormNumberInput.styles";
 
 type Props = {
   label: string;
-  placeholder: number;
   minVal: number;
   maxVal: number;
+  value: number;
+  onValueChange: (value: number) => void;
 };
 
 const FormNumberInput: FC<Props & FieldProps> = ({
   label,
-  placeholder,
   minVal,
   maxVal,
+  value,
+  onValueChange,
 }) => {
-  const [value, setValue] = useState(placeholder);
-
   const handleMinusPress = () => {
     if (value > minVal) {
-      setValue((prevState) => prevState - 1);
+      onValueChange(value - 1);
     }
   };
 
   const handlePlusPress = () => {
     if (value < maxVal) {
-      setValue((prevState) => prevState + 1);
+      onValueChange(value + 1);
     }
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.input}>
         <Pressable

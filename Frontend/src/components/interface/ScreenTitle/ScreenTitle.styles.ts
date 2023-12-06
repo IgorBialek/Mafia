@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     color: COLORS.primaryText,
     fontWeight: "bold",
     fontSize: METRICS.screenTitle.fontSize,
-    marginBottom: METRICS.screenTitle.marginBottom,
+    margin: METRICS.screenTitle.margin,
+    textAlign: "center",
   },
 });
 

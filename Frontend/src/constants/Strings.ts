@@ -11,7 +11,6 @@ const STRINGS = {
     formRoomName: "Room Name",
     formRoomNamePlaceholder: "Amazing Room ✨",
     formRoomSize: "Room Size",
-    formRoomSizePlaceholder: "0",
     formRoomPrivate: "Private",
   },
   joinRoom: {

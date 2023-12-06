@@ -4,9 +4,6 @@ import { COLORS } from "../../../themes/Colors";
 import { METRICS } from "../../../themes/Metrics";
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: METRICS.formNumberInput.container.marginBottom,
-  },
   label: {
     marginVertical: METRICS.formNumberInput.label.marginVertical,
     color: COLORS.primaryText,

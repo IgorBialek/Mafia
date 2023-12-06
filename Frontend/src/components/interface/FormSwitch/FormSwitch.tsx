@@ -17,7 +17,7 @@ const FormSwitch: FC<Props> = ({ label, value, onValueChange }) => {
       <Switch
         value={value}
         onValueChange={onValueChange}
-        trackColor={{ false: COLORS.primary, true: COLORS.secondary }}
+        trackColor={{ false: COLORS.primaryBackground, true: COLORS.secondary }}
         ios_backgroundColor={COLORS.primaryBackground}
       />
     </View>

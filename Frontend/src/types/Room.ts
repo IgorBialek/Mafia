@@ -8,6 +8,4 @@ export type Room = {
   isPrivate: boolean;
   password: string;
   numberOfMafia: number;
-  numberOfDoctors: number;
-  numberOfPoliceman: number;
 };

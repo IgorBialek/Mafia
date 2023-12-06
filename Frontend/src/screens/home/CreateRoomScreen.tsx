@@ -1,9 +1,9 @@
 import { Field, Formik } from "formik";
-import { View } from "react-native";
 
 import FormNumberInput from "../../components/interface/FormNumberInput/FormNumberInput";
 import FormSwitch from "../../components/interface/FormSwitch/FormSwitch";
 import FormTextInput from "../../components/interface/FormTextInput/FormTextInput";
+import FormWrapper from "../../components/interface/FormWrapper/FormWrapper";
 import ScreenTitle from "../../components/interface/ScreenTitle/ScreenTitle";
 import ScreenWrapper from "../../components/interface/ScreenWrapper/ScreenWrapper";
 import STRINGS from "../../constants/Strings";
@@ -14,12 +14,10 @@ type CreateRoomFormValues = Omit<Room, "uuid" | "phase">;
 const CreateRoomScreen = () => {
   let initialValues: CreateRoomFormValues = {
     name: "",
-    size: 0,
+    size: 8,
     isPrivate: false,
     password: "",
-    numberOfMafia: 0,
-    numberOfDoctors: 0,
-    numberOfPoliceman: 0,
+    numberOfMafia: 3,
   };
 
   return (
@@ -32,7 +30,7 @@ const CreateRoomScreen = () => {
         onSubmit={(values: CreateRoomFormValues) => console.log(values)}
       >
         {({ handleSubmit, setFieldValue, values }) => (
-          <View>
+          <FormWrapper>
             {/* input to enter room name */}
             <Field
               component={FormTextInput}
@@ -45,10 +43,13 @@ const CreateRoomScreen = () => {
             <Field
               component={FormNumberInput}
               name="size"
-              placeholder={8}
               label={STRINGS.createRoom.formRoomSize}
               minVal={6}
               maxVal={16}
+              value={values.size}
+              onValueChange={(value: number) => {
+                setFieldValue("size", value);
+              }}
             />
 
             {/* switch for private room */}
@@ -66,16 +67,8 @@ const CreateRoomScreen = () => {
               }}
             </Field>
 
-            {/* switch for advanced settings */}
-
-            {/* if advanced settings are enabled, show input to enter room number of mafia */}
-
-            {/* if advanced settings are enabled, show input to enter room number of doctors */}
-
-            {/* if advanced settings are enabled, show input to enter room number of policeman */}
-
             {/* button to create room */}
-          </View>
+          </FormWrapper>
         )}
       </Formik>
     </ScreenWrapper>

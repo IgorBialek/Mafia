@@ -12,7 +12,7 @@ type Props = {
 
 const FormTextInput: FC<Props & FieldProps> = ({ label, placeholder }) => {
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         style={styles.input}
