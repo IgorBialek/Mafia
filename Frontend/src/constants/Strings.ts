@@ -7,11 +7,12 @@ const STRINGS = {
     title: "Create Room 🏠",
     inputRoomName: "Room Name",
     inputRoomPassword: "Room Password",
-    buttonCreateRoom: "Create",
+    buttonCreateRoom: "New Room",
     formRoomName: "Room Name",
     formRoomNamePlaceholder: "Amazing Room ✨",
     formRoomSize: "Room Size",
     formRoomPrivate: "Private",
+    formRoomNameRequired: "Room Name is required 🙏",
   },
   joinRoom: {
     title: "Join Room 🌐",

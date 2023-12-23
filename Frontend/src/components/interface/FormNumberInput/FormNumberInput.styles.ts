@@ -4,11 +4,6 @@ import { COLORS } from "../../../themes/Colors";
 import { METRICS } from "../../../themes/Metrics";
 
 const styles = StyleSheet.create({
-  label: {
-    marginVertical: METRICS.formNumberInput.label.marginVertical,
-    color: COLORS.primaryText,
-    fontWeight: "bold",
-  },
   input: {
     width: METRICS.formNumberInput.button.width * 3,
     flexDirection: "row",

@@ -11,4 +11,5 @@ export enum COLORS {
   primaryBackground = "#26292B",
 
   border = "#4C5155",
+  error = "#B00020",
 }

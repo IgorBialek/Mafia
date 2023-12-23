@@ -51,4 +51,21 @@ export const METRICS = {
   formWrapper: {
     gap: 10,
   },
+  formSubmitButton: {
+    title: {
+      fontSize: 24,
+    },
+    container: {
+      borderRadius: 5,
+      padding: 10,
+      bottom: 20,
+    },
+  },
+  toastConfig: {
+    error: {
+      height: 100,
+      paddingTop: 40,
+      fontSize: 18,
+    },
+  },
 };

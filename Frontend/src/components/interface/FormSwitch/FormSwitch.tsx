@@ -1,19 +1,20 @@
 import { FC } from "react";
-import { Switch, Text, View } from "react-native";
+import { Switch, View } from "react-native";
 
 import { COLORS } from "../../../themes/Colors";
-import styles from "./FormSwitch.styles";
+import FormLabel from "../FormLabel/FormLabel";
 
 type Props = {
-  label: string;
+  title: string;
   value: boolean;
+  valid: boolean;
   onValueChange: ((value: boolean) => void | Promise<void>) | null | undefined;
 };
 
-const FormSwitch: FC<Props> = ({ label, value, onValueChange }) => {
+const FormSwitch: FC<Props> = ({ title, value, valid, onValueChange }) => {
   return (
     <View>
-      <Text style={styles.label}>{label}</Text>
+      <FormLabel title={title} valid={valid} />
       <Switch
         value={value}
         onValueChange={onValueChange}

@@ -1,4 +1,4 @@
-import { Phases } from "../constants/Phases";
+import { Phases } from "../Frontend/src/constants/Phases";
 
 export type Room = {
   uuid: string;

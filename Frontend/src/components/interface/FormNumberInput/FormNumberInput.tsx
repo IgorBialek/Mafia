@@ -6,21 +6,24 @@ import { COLORS } from "../../../themes/Colors";
 import { METRICS } from "../../../themes/Metrics";
 import MinusIcon from "../../icons/MinusIcon";
 import PlusIcon from "../../icons/PlusIcon";
+import FormLabel from "../FormLabel/FormLabel";
 import styles from "./FormNumberInput.styles";
 
 type Props = {
-  label: string;
+  title: string;
   minVal: number;
   maxVal: number;
   value: number;
+  valid: boolean;
   onValueChange: (value: number) => void;
 };
 
 const FormNumberInput: FC<Props & FieldProps> = ({
-  label,
+  title,
   minVal,
   maxVal,
   value,
+  valid,
   onValueChange,
 }) => {
   const handleMinusPress = () => {
@@ -37,7 +40,7 @@ const FormNumberInput: FC<Props & FieldProps> = ({
 
   return (
     <View>
-      <Text style={styles.label}>{label}</Text>
+      <FormLabel title={title} valid={valid} />
       <View style={styles.input}>
         <Pressable
           style={({ pressed }) => {
