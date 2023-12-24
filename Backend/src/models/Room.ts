@@ -1,13 +1,25 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
+
+import getRoomCode from '../utils/getRoomPassword';
 
 const prisma = new PrismaClient();
 
 export default class Room {
-  static async createRoom(roomName: string, roomSize: number) {
+  static async createRoom(
+    roomName: string,
+    roomSize: number,
+    isPrivate: boolean
+  ) {
+    if (isPrivate) {
+      var password = await getRoomCode();
+    }
+
     let { uuid: roomID } = await prisma.room.create({
       data: {
         name: roomName,
         size: roomSize,
+        isPrivate,
+        password,
       },
     });
 

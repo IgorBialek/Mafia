@@ -27,6 +27,7 @@ model Room {
   name      String
   size      Int
   password String?
+  isPrivate Boolean @default(false)
   phase     String   @default("Lobby")
   players   Player[]
   votes     Vote[]

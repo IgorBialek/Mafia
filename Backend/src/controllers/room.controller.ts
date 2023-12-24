@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import Player from "../models/Player";
-import Room from "../models/Room";
+import Player from '../models/Player';
+import Room from '../models/Room';
 
 export const createRoom = async (req: Request, res: Response) => {
-  let { username, roomName, roomSize } = req.body;
+  let { username, roomName, roomSize, isPrivate } = req.body;
 
   try {
     if (!username || !roomName || !roomSize) {
@@ -15,7 +15,7 @@ export const createRoom = async (req: Request, res: Response) => {
       throw new Error("Room size must be between 0 and 16");
     }
 
-    let { roomID } = await Room.createRoom(roomName, roomSize);
+    let { roomID } = await Room.createRoom(roomName, roomSize, isPrivate);
 
     let { playerID } = await Player.createPlayer(username, roomID, true);
 

@@ -1,8 +1,8 @@
-import { Text, View } from "react-native";
-import { ToastConfig, ToastConfigParams } from "react-native-toast-message";
+import { Text, View } from 'react-native';
+import { ToastConfig, ToastConfigParams } from 'react-native-toast-message';
 
-import { COLORS } from "../src/themes/Colors";
-import { METRICS } from "../src/themes/Metrics";
+import { COLORS } from '../themes/Colors';
+import { METRICS } from '../themes/Metrics';
 
 const ToastConfigDefault: ToastConfig = {
   error: ({ text1 }: ToastConfigParams<any>) => (

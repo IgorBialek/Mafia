@@ -1,19 +1,22 @@
-import { Field, Formik } from "formik";
-import Toast from "react-native-toast-message";
-import * as yup from "yup";
+import { Field, Formik } from 'formik';
+import Toast from 'react-native-toast-message';
+import * as yup from 'yup';
 
-import { Room } from "../../../../Types/Room";
-import FormNumberInput from "../../components/interface/FormNumberInput/FormNumberInput";
-import FormSubmitButton from "../../components/interface/FormSubmitButton/FormSubmitButton";
-import FormSwitch from "../../components/interface/FormSwitch/FormSwitch";
-import FormTextInput from "../../components/interface/FormTextInput/FormTextInput";
-import FormWrapper from "../../components/interface/FormWrapper/FormWrapper";
-import ScreenTitle from "../../components/interface/ScreenTitle/ScreenTitle";
-import ScreenWrapper from "../../components/interface/ScreenWrapper/ScreenWrapper";
-import STRINGS from "../../constants/Strings";
-import { METRICS } from "../../themes/Metrics";
+import { useMutation } from '@tanstack/react-query';
 
-type CreateRoomFormValues = Omit<Room, "uuid" | "phase">;
+import { Room } from '../../../../Types/Room';
+import { createRoom } from '../../api/RoomAPI';
+import FormNumberInput from '../../components/interface/FormNumberInput/FormNumberInput';
+import FormSubmitButton from '../../components/interface/FormSubmitButton/FormSubmitButton';
+import FormSwitch from '../../components/interface/FormSwitch/FormSwitch';
+import FormTextInput from '../../components/interface/FormTextInput/FormTextInput';
+import FormWrapper from '../../components/interface/FormWrapper/FormWrapper';
+import ScreenTitle from '../../components/interface/ScreenTitle/ScreenTitle';
+import ScreenWrapper from '../../components/interface/ScreenWrapper/ScreenWrapper';
+import STRINGS from '../../constants/Strings';
+import { METRICS } from '../../themes/Metrics';
+
+export type CreateRoomFormValues = Omit<Room, "uuid" | "phase">;
 
 const validationSchema = yup.object().shape({
   name: yup.string().required(STRINGS.createRoom.formRoomNameRequired),
@@ -28,6 +31,29 @@ const CreateRoomScreen = () => {
     numberOfMafia: 3,
   };
 
+  const createRoomMutation = useMutation({
+    mutationKey: ["createRoom"],
+    mutationFn: createRoom,
+    onError: (error) => {
+      Toast.show({
+        type: "error",
+        position: "top",
+        text1: error.message,
+        topOffset: 0,
+      });
+    },
+    onSuccess: ({ data }) => {
+      const { roomID, playerID } = data;
+      console.log(roomID, playerID);
+    },
+  });
+
+  const handleCreateRoom = (values: CreateRoomFormValues) => {
+    createRoomMutation.mutate({ ...values, username: "igorb" });
+
+    //TODO move to room screen
+  };
+
   return (
     <ScreenWrapper>
       {/* header with title and maybe some icon */}
@@ -37,7 +63,7 @@ const CreateRoomScreen = () => {
         validationSchema={validationSchema}
         validateOnMount={true}
         initialValues={initialValues}
-        onSubmit={(values: CreateRoomFormValues) => console.log(values)}
+        onSubmit={handleCreateRoom}
       >
         {({ handleSubmit, setFieldValue, values, errors }) => (
           <FormWrapper>
